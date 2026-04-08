@@ -26,9 +26,9 @@ def clean_data():
             purchase_props = row['properties'] or {}
             if purchase_props is None or {}: return False
             phoneValue = purchase_props.get('phone')
-            return purchase_complete_required_keys.issubset(purchase_props.keys()) and phoneValue and phoneValue.startswith('+52') and len(phoneValue) == 13 and phoneValue[3:].isdigit()
-            if purchase_props.get('pyment_method') is None or purchase_props.get('pyment_method') == '': return False
+            if purchase_props.get('payment_method') is None or purchase_props.get('payment_method') == '': return False
             if purchase_props.get('amount') is None or purchase_props.get('amount') == -0 : return False
+            return purchase_complete_required_keys.issubset(purchase_props.keys()) and phoneValue and phoneValue.startswith('+52') and len(phoneValue) == 13 and phoneValue[3:].isdigit()
         elif row['event'] == 'search':  
             search_props = row['properties'] or {}
             if search_props is None or {}: return False
